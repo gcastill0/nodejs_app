@@ -1,0 +1,22 @@
+extends ./layout
+
+block content
+    .container
+        .sw-card.sw-card-body
+            p
+            | Policy requires that you provide a place to store various passwords, software licenses, and other sensitive information in a virtual vault that is locked with a PBKDF2-guarded master password.
+            p
+            | Based on your Github group association and project delegation, the following credentials are available.
+            |
+            |
+
+            .sw-card-creds
+              pre#json= JSON.stringify(payload, null, 3)
+
+            p
+            | How to use your credentials:
+
+            ol
+              li You must copy these credentials and place them in your local password manager.
+              li Use the <em>secret</em> to log into the application. Refer to your onboarding instructions to obtain the URL.
+              li This secret will expire in 30 days. You will need to return to this procedure when that happens.

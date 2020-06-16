@@ -1,0 +1,17 @@
+extends ./layout
+
+block content
+    .container
+        .sw-card.sw-card-body
+            h1.tc Onboarding Express
+            p
+            | A personal access token is required to authenticate to GitHub. You can create a personal access token by following the instructions on 
+            a(href="https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line") this page.
+            |
+            <br/>
+
+            form(method="post" action="/vault")
+                fieldset
+                    input.sw-input(type="text" name="token")
+                .tc(style="margin-top:20px")
+                    button.sw-btn.btn-pblue Proceed

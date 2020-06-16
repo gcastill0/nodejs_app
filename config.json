@@ -1,0 +1,8 @@
+{
+  "port": 3000,
+  "vault": {
+    "apiVersion": "v1",
+    "endpoint": "http://192.168.10.50:8200",
+    "token": "password"
+  }
+}

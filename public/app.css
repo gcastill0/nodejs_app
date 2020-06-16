@@ -1,0 +1,128 @@
+h1,
+h2,
+h3 {
+  margin: 0px 0px 20px 0px;
+  font-weight: 500;
+}
+fieldset {
+  border: none;
+  margin-bottom: 1rem;
+}
+.tc {
+  text-align: center;
+}
+.sw-form fieldset {
+  border: none;
+}
+.sw-form label {
+  margin-bottom: 0.25rem;
+  display: inline-block;
+  font-size: 0.95rem;
+}
+.sw-input {
+  border: none;
+  padding: 0.375rem 0.75rem;
+  outline: none;
+  height: calc(1.5em + 0.75rem + 2px);
+  background-color: #f3f3f3;
+  display: block;
+  width: 100%;
+  font-size: 0.95rem;
+  font-weight: 400;
+  border-radius: 4px;
+  line-height: 1.5;
+  color: #0F2965;
+  box-shadow: 0 1px 2px 1px rgba(158, 158, 158, 0.25);
+  -webkit-transition: box-shadow 0.15s ease-in-out;
+  transition: box-shadow 0.15s ease-in-out;
+}
+.sw-input:focus {
+  box-shadow: 0 1px 2px 1.5px rgba(0, 0, 0, 0.15);
+}
+
+body {
+  background-color: #efefef;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+}
+body,
+button,
+input,
+select {
+  font-family: "Montserrat", sans-serif;
+}
+*,
+:after,
+:before {
+  box-sizing: border-box;
+}
+
+.sw-card {
+  background-color: #fff;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+}
+
+.sw-card-body {
+  padding: 1rem 1.5rem;
+}
+
+.sw-card-creds {
+  margin: 20px 20px 20px 20px;
+  background-color: #D0DBF5;
+}
+
+.sw-card-img {
+}
+
+.sw-card-img img {
+  width: 100%;
+  border-top-left-radius: calc(0.25rem - 1px);
+  border-top-right-radius: calc(0.25rem - 1px);
+}
+
+.container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+@media only screen and (max-width: 450px) {
+  .container {
+    width: 100%;
+  }
+}
+
+.sw-btn {
+  border-radius: 3px;
+  padding: 8.5px 20px;
+  font-size: 14px;
+  outline: none;
+  background-color: #fff;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.4px;
+  transition: background-color 0.4s;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.25);
+  text-transform: uppercase;
+}
+
+.btn-pblue {
+  background-color: rgb(89, 78, 252);
+  color: #fff;
+}
+
+.btn-pblue:hover {
+  background-color: rgb(72, 62, 228);
+}
+
+#app {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+#json {
+  width: 75%;
+  margin: 0 auto;
+  overflow-x: scroll;
+}
