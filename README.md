@@ -72,7 +72,7 @@ This is a sample of the expected payload returned by the Vault server. The impor
 
 		lease_duration: 2764800,
 		renewable: true,
-		entity_id: 8 dea795e - 7 f86 - 8 dc9 - 3e3 b - 2 c19ae49a833,
+		entity_id: 8dea795e-7f86-8dc9-3e3b-2c19ae49a833,
 		token_type: service,
 		orphan: true
         }
@@ -87,7 +87,7 @@ Given the `client_token` in the operation, the application is now able to reques
 This is the final payload to be displayed on page two of the NodeJS application:
 
     {
-	  request_id: b379471f - a2ef - 03 a0 - 0b 4 f - 949745e62225,
+	  request_id: b379471f-a2ef-03a0-0b4f-949745e62225,
 	  lease_id: ,
 	  renewable: false,
 	  lease_duration: 2764800,
