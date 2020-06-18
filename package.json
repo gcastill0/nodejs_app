@@ -1,12 +1,13 @@
 {
-	"name": "gcastill0",
+	"name": "website",
 	"version": "1.0.0",
 	"description": "",
 	"main": "app.js",
 	"scripts": {
-           "test": "echo \"No test specified\""
+           "test": "echo \"No test specified\"",
+	   "start": "node ./bin/www"
 	},
-	"author": "",
+	"author": "gcastill0",
 	"license": "ISC",
 	"dependencies": {
 		"body-parser": "^1.19.0",
