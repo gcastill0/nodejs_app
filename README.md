@@ -1,15 +1,15 @@
 The NodeJS app should include three pages:
 
-1. Single window with an input panel (nothing else). Maybe a submit button.
-2. An error page providing instructions to contact someone
-3. A success window that displays the final payload, along with instructions on how to use
+* Single window with an input panel (nothing else). Maybe a submit button.
+* An error page providing instructions to contact someone
+* A success window that displays the final payload, along with instructions on how to use
 
 Workflow:
 
 1. User provides auth token to the NodeJS app
   - If there is an error in authentication, display error page
   - If successful, move to step 2
-2. Vault returns payload with session token (client_token)
+2. Vault returns payload with session token or `client_token`
   - Parse client_token
   - If there is no client_token, display error page
   - If successful move to step 3
@@ -78,7 +78,7 @@ This is a sample of the expected payload returned by the Vault server. The impor
         }
     }
 
-Given the client_token in the operation, the application is now able to request the secret located in the vault. The endpoint for that secret is different than above. The following is a sample curlcommand to retrieve the secret:
+Given the `client_token` in the operation, the application is now able to request the secret located in the vault. The endpoint for that secret is different than above. The following is a sample `curl` command to retrieve the secret:
 
     curl \
     --header "X-Vault-Token: s.j21DuIQZGnCWTbXwu2uD2kGq" \
