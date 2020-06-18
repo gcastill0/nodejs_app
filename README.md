@@ -7,122 +7,95 @@ The NodeJS app should include three pages:
 Workflow:
 
 1. User provides auth token to the NodeJS app
-  1. If there is an error in authentication, display error page
-  2. If successful, move to step 2
-2. Vault returns payload with session token (client\_token)
-  1. Parse client\_token
-  2. If there is no client\_token, display error page
-  3. If successful move to step 3
+  - If there is an error in authentication, display error page
+  - If successful, move to step 2
+2. Vault returns payload with session token (client_token)
+  - Parse client_token
+  - If there is no client_token, display error page
+  - If successful move to step 3
 3. NodeJS app uses session token to retrieve secret
 4. Vault returns payload – which includes secret
 5. NodeJS app provides display of the payload (nicely formatted)
 
 We use a GitHub personal token to login to Vault. The objective is to have Vault authenticate the user and confirm the identity. The Vault server is located at:
 
-http://35.196.17.47:8200
+    http://${VAULT_ADDR}:8200
 
 The token value for the test is the following:
 
-65fa29d416909e9867c794ae6792999f2d251aaa
+    65fa29d416909e9867c794ae6792999f2d251aaa
+
+_(Please note: This is not a real token anymore)_
+
+Use Vault terminology to express that variable:
+
+    export VAULT_TOKEN="65fa29d416909e9867c794ae6792999f2d251aaa"
+
 
 Here is a simple example of the curl command that allows for the call-in.
 
-| curl \ --request POST \--data &#39;{&quot;token&quot;: &quot;65fa29d416909e9867c794ae6792999f2d251aaa&quot;}&#39; \[http://35.196.17.47:8200/v1/auth/github/login](http://35.196.17.47:8200/v1/auth/github/login) |
-| --- |
+    curl \ 
+    --data '{"token": $VAULT_TOKEN}' \
+    --request POST \
+    http://${VAULT_ADDR}:8200/v1/auth/github/login
 
-This is a sample of the expected payload returned by the Vault server. The importance of this payload is the client\_tokenas it allows for the next operation.
 
-{
+This is a sample of the expected payload returned by the Vault server. The importance of this payload is the client_tokenas it allows for the next operation.
 
-&quot;request\_id&quot;: &quot;b7c7b5c5-e7be-29f7-e1ab-fabf3ebf5daf&quot;,
+    {
+	    request_id: b7c7b5c5-e7be-29f7-e1ab-fabf3ebf5daf,
+	    lease_id: ,
+	    renewable: false,
+	    lease_duration: 0,
+	    data: null,
+	    wrap_info: null,
+	    warnings: null,
+	    auth: {
+		client_token: s.j21DuIQZGnCWTbXwu2uD2kGq,
+		accessor: QWLtt05sTFB8sdSvrgrujLh7,
+		policies: [
+			default,
+			dev - policy
+		],
+		token_policies: [
+			default
+		],
 
-&quot;lease\_id&quot;: &quot;&quot;,
+		identity_policies: [
+			dev - policy
+		],
 
-&quot;renewable&quot;: false,
+		metadata: {
+			org: interrupt - software,
+			username: gcdata - admin
+		},
 
-&quot;lease\_duration&quot;: 0,
+		lease_duration: 2764800,
+		renewable: true,
+		entity_id: 8 dea795e - 7 f86 - 8 dc9 - 3e3 b - 2 c19ae49a833,
+		token_type: service,
+		orphan: true
+        }
+    }
 
-&quot;data&quot;: null,
+Given the client_token in the operation, the application is now able to request the secret located in the vault. The endpoint for that secret is different than above. The following is a sample curlcommand to retrieve the secret:
 
-&quot;wrap\_info&quot;: null,
+    curl \
+    --header "X-Vault-Token: s.j21DuIQZGnCWTbXwu2uD2kGq" \
+    http://${VAULT_ADDR}:8200/v1/secret/nodejs-app
 
-&quot;warnings&quot;: null,
+This is the final payload to be displayed on page two of the NodeJS application:
 
-&quot;auth&quot;: {
+    {
+	  request_id: b379471f - a2ef - 03 a0 - 0b 4 f - 949745e62225,
+	  lease_id: ,
+	  renewable: false,
+	  lease_duration: 2764800,
+	  data: {
+		secret: OrgvU84XLJ6vnPrT50xyao05
+	},
 
-&quot;client\_token&quot;: &quot;s.j21DuIQZGnCWTbXwu2uD2kGq&quot;,
-
-&quot;accessor&quot;: &quot;QWLtt05sTFB8sdSvrgrujLh7&quot;,
-
-&quot;policies&quot;: [
-
-&quot;default&quot;,
-
-&quot;dev-policy&quot;
-
-],
-
-&quot;token\_policies&quot;: [
-
-&quot;default&quot;
-
-],
-
-&quot;identity\_policies&quot;: [
-
-&quot;dev-policy&quot;
-
-],
-
-&quot;metadata&quot;: {
-
-&quot;org&quot;: &quot;interrupt-software&quot;,
-
-&quot;username&quot;: &quot;gcdata-admin&quot;
-
-},
-
-&quot;lease\_duration&quot;: 2764800,
-
-&quot;renewable&quot;: true,
-
-&quot;entity\_id&quot;: &quot;8dea795e-7f86-8dc9-3e3b-2c19ae49a833&quot;,
-
-&quot;token\_type&quot;: &quot;service&quot;,
-
-&quot;orphan&quot;: true
-
-}
-
-}
-
-Given the client\_token in the operation, the application is now able to request the secret located in the vault. The endpoint for that secret is different than above. The following is a sample curlcommand to retrieve the secret:
-
-| curl \--header &quot;X-Vault-Token: s.j21DuIQZGnCWTbXwu2uD2kGq&quot; \[http://35.196.17.47:8200/v1/secret/nodejs-app](http://35.196.17.47:8200/v1/secret/nodejs-app) |
-| --- |
-
-This is the final payload to be displayed on page two of the NodeJS application.
-
-{
-
-&quot;request\_id&quot;: &quot;b379471f-a2ef-03a0-0b4f-949745e62225&quot;,
-
-&quot;lease\_id&quot;: &quot;&quot;,
-
-&quot;renewable&quot;: false,
-
-&quot;lease\_duration&quot;: 2764800,
-
-&quot;data&quot;: {
-
-&quot;secret&quot;: &quot;OrgvU84XLJ6vnPrT50xyao05&quot;
-
-},
-
-&quot;wrap\_info&quot;: null,
-
-&quot;warnings&quot;: null,
-
-&quot;auth&quot;: null
-
-}
+	wrap_info: null,
+	warnings: null,
+	auth: null
+	}
