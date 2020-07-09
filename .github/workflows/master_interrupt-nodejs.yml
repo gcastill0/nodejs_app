@@ -31,5 +31,5 @@ jobs:
       with:
         app-name: 'interrupt-nodejs'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_069f78af4e434ff2be19584ef71f5514 }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_1f0fa26345d94a1390980b638832cb6f }}
         package: .
